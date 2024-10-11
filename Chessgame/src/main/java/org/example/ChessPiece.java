@@ -1,7 +1,7 @@
 package org.example;
 
 public abstract class ChessPiece {
-    private String color;
+    private final String color;
     private boolean check;
 
     public ChessPiece(String color) {
@@ -12,34 +12,26 @@ public abstract class ChessPiece {
         return color;
     }
 
-    public boolean checkCleanPath(ChessBoard chessBoard, int line, int column, int toLine, int toColumn) {
-        String pieceType = chessBoard.board[line][column].getSymbol();
-        // TODO придумать способ проверки, но потом все перенести по классам
-        switch (pieceType) {
-            case "B" -> {
-                return true;
-            }
-            case "Q" -> {
-                return true;
-            }
-            case "R" -> {
-                return true;
-            }
-            case "P" -> {
-                return true;
-            }
-            case "K" -> {
-                return chessBoard.isFieldUnderAttack(toLine, toColumn);
-            }
-        }
-        return false;
-    }
-
     public boolean movesInSamePosition(int line, int column, int toLine, int toColumn) {
         return line == toLine && column == toColumn;
     }
 
-    public abstract boolean canMoveToPosition(ChessBoard chessBoard, int line, int column, int toLine, int toColumn);
+    public abstract boolean movementPatternIsCorrect(int line, int column, int toLine, int toColumn);
+
+    public boolean finalPositionIsEmptyOrEnemy(ChessBoard chessBoard, int toLine, int toColumn) {
+        ChessPiece finalPosition = chessBoard.board[toLine][toColumn];
+        return finalPosition == null || !finalPosition.getColor().equals(chessBoard.nowPlayer) ;
+    }
+
+    public abstract boolean pathIsClear(ChessBoard chessBoard, int line, int column, int toLine, int toColumn);
+
+    public boolean canMoveToPosition(ChessBoard chessBoard, int line, int column, int toLine, int toColumn) {
+        return coordinatesAreCorrect(chessBoard, line, column, toLine, toColumn) && movementPatternIsCorrect(line, column, toLine, toColumn) && finalPositionIsEmptyOrEnemy(chessBoard, toLine, toColumn) && pathIsClear(chessBoard, line, column, toLine, toColumn);
+    }
+
+    public boolean coordinatesAreCorrect(ChessBoard chessBoard, int line, int column, int toLine, int toColumn) {
+        return chessBoard.checkPos(toLine) && chessBoard.checkPos(toColumn) && !movesInSamePosition(line, column, toLine, toColumn);
+    }
 
     public abstract String getSymbol();
 }

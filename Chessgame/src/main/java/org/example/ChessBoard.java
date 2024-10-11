@@ -62,15 +62,4 @@ public class ChessBoard {
     public boolean castling7() {
         return true;
     }
-
-    public boolean isFieldUnderAttack(int toLine, int toColumn) {
-        for (int i = 0; i < 8; i++) {
-            for (int j = 0; j < 8; j++) {
-                if (!board[i][j].getColor().equals(nowPlayer) && board[i][j].canMoveToPosition(this, i, j, toLine, toColumn)) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
 }
