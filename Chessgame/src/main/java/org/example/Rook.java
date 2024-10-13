@@ -1,8 +1,5 @@
 package org.example;
 
-import java.util.function.Consumer;
-import java.util.function.Predicate;
-
 import static java.lang.Math.abs;
 import static java.util.Objects.nonNull;
 
@@ -20,7 +17,7 @@ public class Rook extends ChessPiece {
 
     @Override
     public boolean canAttack(ChessBoard chessBoard, int line, int column, int toLine, int toColumn) {
-        return movementPatternIsCorrect(line, column, toLine, toColumn) && pathIsClear(chessBoard, line, column, toLine, toColumn) ;
+        return movementPatternIsCorrect(line, column, toLine, toColumn) && pathIsClear(chessBoard, line, column, toLine, toColumn);
     }
 
     @Override

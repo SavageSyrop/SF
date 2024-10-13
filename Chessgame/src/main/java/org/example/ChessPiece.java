@@ -30,7 +30,7 @@ public abstract class ChessPiece {
 
     public boolean finalPositionIsEmptyOrEnemy(ChessBoard chessBoard, int toLine, int toColumn) {
         ChessPiece finalPosition = chessBoard.board[toLine][toColumn];
-        return finalPosition == null || !finalPosition.getColor().equals(chessBoard.nowPlayer) ;
+        return finalPosition == null || !finalPosition.getColor().equals(chessBoard.nowPlayer);
     }
 
     public abstract boolean pathIsClear(ChessBoard chessBoard, int line, int column, int toLine, int toColumn);

@@ -1,7 +1,5 @@
 package org.example;
 
-import java.util.Arrays;
-
 public class ChessBoard {
     public ChessPiece[][] board = new ChessPiece[8][8]; // creating a field for game
     String nowPlayer;
@@ -57,11 +55,89 @@ public class ChessBoard {
         return pos >= 0 && pos <= 7;
     }
 
-    public boolean castling0() {
-        return true;
+    public boolean castlingShort() {
+        if (nowPlayer.equals("White")) {
+            if (board[0][4] == null || board[0][7] == null) return false;
+            if (board[0][4].getSymbol().equals("K") && board[0][7].getSymbol().equals("R") &&
+                    board[0][5] == null && board[0][6] == null) {
+                if (board[0][4].getColor().equals("White") && board[0][7].getColor().equals("White") &&
+                        board[0][4].isCheck() && board[0][7].isCheck()
+                        && new King("White").pathIsClear(this, 0, 3, 0, 4)
+                        && new King("White").pathIsClear(this, 0, 4, 0, 5)
+                        && new King("White").pathIsClear(this, 0, 5, 0, 6)) {
+                    board[0][4] = null;
+                    board[0][5] = new Rook("White");
+                    board[0][5].setCheck(false);
+                    board[0][6] = new King("White");
+                    board[0][6].setCheck(false);
+                    board[0][7] = null;
+                    nowPlayer = "Black";
+                    return true;
+                } else return false;
+            } else return false;
+        } else {
+            if (board[7][4] == null || board[7][7] == null) return false;
+            if (board[7][4].getSymbol().equals("K") && board[7][7].getSymbol().equals("R") &&
+                    board[7][5] == null && board[7][6] == null) {
+                if (board[7][4].getColor().equals("Black") && board[7][7].getColor().equals("Black") &&
+                        board[7][4].isCheck() && board[7][7].isCheck()
+                        && new King("Black").pathIsClear(this, 7, 3, 7, 4)
+                        && new King("Black").pathIsClear(this, 7, 4, 7, 5)
+                        && new King("Black").pathIsClear(this, 7, 5, 7, 6)) {
+                    board[7][4] = null;
+                    board[7][5] = new Rook("Black");
+                    board[7][5].setCheck(false);
+                    board[7][6] = new King("Black");
+                    board[7][6].setCheck(false);
+                    board[7][7] = null;
+                    nowPlayer = "White";
+                    return true;
+                } else return false;
+            } else return false;
+        }
     }
 
-    public boolean castling7() {
-        return true;
+    public boolean castlingLong() {
+        if (nowPlayer.equals("White")) {
+            if (board[0][0] == null || board[0][4] == null) return false;
+            if (board[0][0].getSymbol().equals("R") && board[0][4].getSymbol().equals("K") &&
+                    board[0][1] == null && board[0][2] == null && board[0][3] == null) {
+                if (board[0][0].getColor().equals("White") && board[0][4].getColor().equals("White") &&
+                        board[0][0].isCheck() && board[0][4].isCheck()
+                        && new King("White").pathIsClear(this, 0, 3, 0, 4)
+                        && new King("White").pathIsClear(this, 0, 2, 0, 3)
+                        && new King("White").pathIsClear(this, 0, 1, 0, 2)
+                        && new King("White").pathIsClear(this, 0, 0, 0, 1)) {
+                    board[0][4] = null;
+                    board[0][3] = new Rook("White");
+                    board[0][3].setCheck(false);
+                    board[0][2] = new King("White");
+                    board[0][2].setCheck(false);
+                    board[0][0] = null;
+                    nowPlayer = "Black";
+                    return true;
+                } else return false;
+            } else return false;
+        } else {
+            if (board[7][0] == null || board[7][4] == null) return false;
+            if (board[7][0].getSymbol().equals("R") && board[7][4].getSymbol().equals("K") &&
+                    board[7][1] == null && board[7][2] == null && board[7][3] == null) {
+                if (board[7][0].getColor().equals("Black") && board[7][4].getColor().equals("Black") &&
+                        board[7][0].isCheck() && board[7][4].isCheck()
+                        && new King("Black").pathIsClear(this, 7, 3, 7, 4)
+                        && new King("Black").pathIsClear(this, 7, 2, 7, 3)
+                        && new King("Black").pathIsClear(this, 7, 1, 7, 2)
+                        && new King("Black").pathIsClear(this, 7, 0, 7, 1)) {
+                    board[7][4] = null;
+                    board[7][3] = new Rook("Black");
+                    board[7][3].setCheck(false);
+                    board[7][2] = new King("Black");
+                    board[7][2].setCheck(false);
+                    board[7][0] = null;
+                    nowPlayer = "White";
+                    return true;
+                } else return false;
+            } else return false;
+        }
     }
 }

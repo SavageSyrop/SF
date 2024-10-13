@@ -47,12 +47,12 @@ public class Main {
         ChessBoard board = buildBoard();
         Scanner scanner = new Scanner(System.in);
         System.out.println("""
-               Чтобы проверить игру надо вводить команды:
-               'exit' - для выхода
-               'replay' - для перезапуска игры
-               'castling0' или 'castling7' - для рокировки по соответствующей линии
-               'move 1 1 2 3' - для передвижения фигуры с позиции 1 1 на 2 3(поле это двумерный массив от 0 до 7)
-               Проверьте могут ли фигуры ходить друг сквозь друга, корректно ли съедают друг друга, можно ли поставить шах и сделать рокировку?""");
+                Чтобы проверить игру надо вводить команды:
+                'exit' - для выхода
+                'replay' - для перезапуска игры
+                'castling0' или 'castling7' - для рокировки по соответствующей линии
+                'move 1 1 2 3' - для передвижения фигуры с позиции 1 1 на 2 3(поле это двумерный массив от 0 до 7)
+                Проверьте могут ли фигуры ходить друг сквозь друга, корректно ли съедают друг друга, можно ли поставить шах и сделать рокировку?""");
         System.out.println();
         board.printBoard();
         while (true) {
@@ -63,15 +63,15 @@ public class Main {
                 board = buildBoard();
                 board.printBoard();
             } else {
-                if (s.equals("castling0")) {
-                    if (board.castling0()) {
+                if (s.equals("castlingLong")) {
+                    if (board.castlingLong()) {
                         System.out.println("Рокировка удалась");
                         board.printBoard();
                     } else {
                         System.out.println("Рокировка не удалась");
                     }
-                } else if (s.equals("castling7")) {
-                    if (board.castling7()) {
+                } else if (s.equals("castlingShort")) {
+                    if (board.castlingShort()) {
                         System.out.println("Рокировка удалась");
                         board.printBoard();
                     } else {

@@ -31,7 +31,7 @@ public class Pawn extends ChessPiece {
     }
 
     @Override
-    public boolean canAttack(ChessBoard board, int line, int column, int toLine, int toColumn) {
+    public boolean canAttack(ChessBoard chessBoard, int line, int column, int toLine, int toColumn) {
         if ("Black".equals(this.getColor())) {
             return line - toLine == 1 && (column - toColumn == 1 || toColumn - column == 1);
         } else {
@@ -42,7 +42,7 @@ public class Pawn extends ChessPiece {
     @Override
     public boolean pathIsClear(ChessBoard chessBoard, int line, int column, int toLine, int toColumn) {
         if (column != toColumn) {
-            return chessBoard.board[toLine][toColumn]!=null && !chessBoard.board[toLine][toColumn].getColor().equals(this.getColor());
+            return chessBoard.board[toLine][toColumn] != null && !chessBoard.board[toLine][toColumn].getColor().equals(this.getColor());
         }
         if ("Black".equals(this.getColor())) {
             if (line - toLine == 2) {
@@ -53,7 +53,7 @@ public class Pawn extends ChessPiece {
                 return chessBoard.board[line + 1][column] == null;
             }
         }
-        return chessBoard.board[toLine][toColumn]==null;
+        return chessBoard.board[toLine][toColumn] == null;
     }
 
 
