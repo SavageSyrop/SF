@@ -2,7 +2,7 @@ package org.example;
 
 public abstract class ChessPiece {
     private final String color;
-    private boolean check;
+    private boolean check = true;
 
     public ChessPiece(String color) {
         this.color = color;
@@ -12,11 +12,21 @@ public abstract class ChessPiece {
         return color;
     }
 
+    public void setCheck(boolean check) {
+        this.check = check;
+    }
+
+    public boolean isCheck() {
+        return check;
+    }
+
     public boolean movesInSamePosition(int line, int column, int toLine, int toColumn) {
         return line == toLine && column == toColumn;
     }
 
     public abstract boolean movementPatternIsCorrect(int line, int column, int toLine, int toColumn);
+
+    public abstract boolean canAttack(ChessBoard chessBoard, int line, int column, int toLine, int toColumn);
 
     public boolean finalPositionIsEmptyOrEnemy(ChessBoard chessBoard, int toLine, int toColumn) {
         ChessPiece finalPosition = chessBoard.board[toLine][toColumn];

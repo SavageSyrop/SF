@@ -1,13 +1,14 @@
 package org.example;
 
 import java.util.function.Consumer;
+import java.util.function.Function;
 import java.util.function.Predicate;
+import java.util.function.Supplier;
 
 public class MovingParams {
     private Predicate<Integer> needToChangePos;
-    private Consumer<Integer> changePos;
+    private Function<Integer, Integer> changePos;
     private int starPos;
-    private int finishPos;
 
     public Predicate<Integer> getNeedToChangePos() {
         return needToChangePos;
@@ -17,11 +18,11 @@ public class MovingParams {
         this.needToChangePos = needToChangePos;
     }
 
-    public Consumer<Integer> getChangePos() {
+    public Function<Integer, Integer> getChangePos() {
         return changePos;
     }
 
-    public void setChangePos(Consumer<Integer> changePos) {
+    public void setChangePos(Function<Integer, Integer> changePos) {
         this.changePos = changePos;
     }
 
@@ -31,13 +32,5 @@ public class MovingParams {
 
     public void setStarPos(int starPos) {
         this.starPos = starPos;
-    }
-
-    public int getFinishPos() {
-        return finishPos;
-    }
-
-    public void setFinishPos(int finishPos) {
-        this.finishPos = finishPos;
     }
 }

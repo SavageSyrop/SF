@@ -22,8 +22,10 @@ public class ChessBoard {
             if (board[startLine][startColumn].canMoveToPosition(this, startLine, startColumn, endLine, endColumn)) {
                 board[endLine][endColumn] = board[startLine][startColumn]; // if piece can move, we moved a piece
                 board[startLine][startColumn] = null; // set null to previous cell
+                if (board[endLine][endColumn].getSymbol().equals("R") || board[endLine][endColumn].getSymbol().equals("K")) {
+                    board[endLine][endColumn].setCheck(false);
+                }
                 this.nowPlayer = this.nowPlayerColor().equals("White") ? "Black" : "White";
-
                 return true;
             } else return false;
         } else return false;
